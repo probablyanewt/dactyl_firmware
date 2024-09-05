@@ -18,3 +18,6 @@ uploadfs:
 
 update:
 	pio -f -c vim update
+
+debug:
+	sudo minicom -D /dev/ttyACM0
