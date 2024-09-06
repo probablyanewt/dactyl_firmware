@@ -1,0 +1,30 @@
+/ {
+	chosen {
+		zephyr,console = &cdc_acm_uart0;
+	};
+  columns {
+    compatible = "gpio-columns";
+    column1: column1 {
+      gpios = <&gpio1 3 GPIO_OUTPUT_HIGH;
+    };
+  };
+  rows {
+    compatible = "gpio-rows";
+    row1: row1 {
+      gpios = <&gpio2 10 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+    };
+  };
+  aliases {
+    column1 = &column1;
+    row1 = &row1;
+  };
+};
+
+&zephyr_udc0 {
+	cdc_acm_uart0: cdc_acm_uart0 {
+		compatible = "zephyr,cdc-acm-uart";
+    label = "ZEPHYR CONSOLE";
+	};
+};
+
+

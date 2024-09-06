@@ -1,0 +1,11 @@
+description: GPIO pins to switch power to columns of the matrix
+compatible: "gpio-columns"
+
+child-binding:
+  description: GPIO Columns child node
+  properties:
+    gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The GPIO pin representing a column in the matrix.

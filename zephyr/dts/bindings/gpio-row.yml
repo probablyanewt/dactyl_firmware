@@ -1,0 +1,11 @@
+description: GPIO pins to read activated rows in the matrix
+compatible: "gpio-rows"
+
+child-binding:
+  description: GPIO Rows child node
+  properties:
+    gpios:
+      type: phandle-array
+      required: true
+      description: |
+        The GPIO pin representing a row in the matrix.
