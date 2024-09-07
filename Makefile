@@ -1,4 +1,6 @@
-all:
+all: clean build
+
+build:
 	pio -f -c vim run
 
 init:
