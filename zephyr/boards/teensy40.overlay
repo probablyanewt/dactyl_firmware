@@ -5,17 +5,24 @@
   columns {
     compatible = "gpio-columns";
     column1: column1 {
-      gpios = <&gpio1 3 GPIO_OUTPUT_HIGH;
+      gpios = <&gpio1 3 GPIO_ACTIVE_HIGH>;
+      label = "Column1";
+    };
+    column2: column2 {
+      gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+      label = "Column2";
     };
   };
   rows {
     compatible = "gpio-rows";
     row1: row1 {
-      gpios = <&gpio2 10 (GPIO_PULL_DOWN | GPIO_ACTIVE_HIGH)>;
+      gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>;
+      label = "Row1";
     };
   };
   aliases {
     column1 = &column1;
+    column2 = &column2;
     row1 = &row1;
   };
 };
@@ -27,4 +34,7 @@
 	};
 };
 
+&lpuart6 {
+  status = "disabled";
+};
 

@@ -9,3 +9,7 @@ child-binding:
       required: true
       description: |
         The GPIO pin representing a row in the matrix.
+    label:
+      type: string
+      required: true
+      description: A label
