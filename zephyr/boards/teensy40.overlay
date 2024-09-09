@@ -21,6 +21,9 @@
     };
   };
   aliases {
+    rhs-column-dir = &rhs_column_dir;
+    rhs-rows = &rhs_rows;
+    rhs-columns = &rhs_columns;
     column1 = &column1;
     column2 = &column2;
     row1 = &row1;
@@ -36,5 +39,24 @@
 
 &lpuart6 {
   status = "disabled";
+};
+
+&lpi2c1 {
+  status = "okay";
+  rhs_column_dir: rhs_column_dir@20 {
+    compatible = "rhs-register";
+    reg = <0x20>;
+    label = "IO direction config register for the rows register";
+  };
+  rhs_rows: rhs_rows@13 {
+    compatible = "rhs-register";
+    reg = <0x13>;
+    label = "Register for rows output GPIO";
+  };
+  rhs_columns: rhs_colums@12 {
+    compatible = "rhs-register";
+    reg = <0x12>;
+    label = "Register for columns input GPIO";
+  };
 };
 

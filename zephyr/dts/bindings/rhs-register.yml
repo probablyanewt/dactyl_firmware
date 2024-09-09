@@ -1,0 +1,5 @@
+description: Right Hand Side I2C Register
+
+compatible: "rhs-register"
+
+include: i2c-device.yaml
