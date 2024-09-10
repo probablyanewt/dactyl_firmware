@@ -4,7 +4,7 @@
 - [x] Compile something and flash it
 - [x] Transmit something over a serial connection 
 - [x] Turn LED on when the top left button on the left pad is pressed
-- [] Turn LED on when the top left button on the right pad is pressed (I2C)
+- [x] Turn LED on when the top left button on the right pad is pressed (I2C)
 - [] Complete the entire matrix for the left side
 - [] Complete the entire matrix for the right side
 - [] First layer basic keymap (no modifiers)
