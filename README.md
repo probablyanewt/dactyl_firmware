@@ -5,20 +5,20 @@ This repo contains the firmware for my dactyl keyboard, written in C using the Z
 ## Pin configuration
 
 ### LHS
-| Pin | Usage    |
-|-----|----------|
-|  0  | Column 1 |
-|  1  | Column 2 |
-|  2  | Column 3 |
-|  3  | Column 4 |
-|  4  | Column 5 |
-|  5  | Column 6 |
-|  6  | Row 1    |
-|  7  | Row 2    |
-|  8  | Row 3    |
-|  9  | Row 4    |
-| 10  | Row 5    |
-| 11  | Row 6    |
+| Pin | Zephyr Port/Pin | Usage    |
+|-----|-----------------|----------|
+|  0  | GPIO1_3         | Column 1 |
+|  1  | GPIO1_2         | Column 2 |
+|  2  | GPIO4_4         | Column 3 |
+|  3  | GPIO4_5         | Column 4 |
+|  4  | GPIO4_6         | Column 5 |
+|  5  | GPIO4_8         | Column 6 |
+|  6  | GPIO2_10        | Row 1    |
+|  7  | GPIO2_17        | Row 2    |
+|  8  | GPIO2_16        | Row 3    |
+|  9  | GPIO2_11        | Row 4    |
+| 10  | GPIO2_0         | Row 5    |
+| 11  | GPIO2_2         | Row 6    |
 
 | Pin | Usage    | 
 |-----|----------| 

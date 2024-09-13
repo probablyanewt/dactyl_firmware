@@ -2,6 +2,21 @@
 	chosen {
 		zephyr,console = &cdc_acm_uart0;
 	};
+  aliases {
+    rhs = &rhs;
+    column1 = &column1;
+    column2 = &column2;
+    column3 = &column3;
+    column4 = &column4;
+    column5 = &column5;
+    column6 = &column6;
+    row1 = &row1;
+    row2 = &row2;
+    row3 = &row3;
+    row4 = &row4;
+    row5 = &row5;
+    row6 = &row6;
+  };
   columns {
     compatible = "gpio-columns";
     column1: column1 {
@@ -12,6 +27,22 @@
       gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
       label = "Column2";
     };
+    column3: column3 {
+      gpios = <&gpio4 4 GPIO_ACTIVE_HIGH>;
+      label = "Column3";
+    };
+    column4: column4 {
+      gpios = <&gpio4 5 GPIO_ACTIVE_HIGH>;
+      label = "Column4";
+    };
+    column5: column5 {
+      gpios = <&gpio4 6 GPIO_ACTIVE_HIGH>;
+      label = "Column5";
+    };
+    column6: column6 {
+      gpios = <&gpio4 8 GPIO_ACTIVE_HIGH>;
+      label = "Column6";
+    };
   };
   rows {
     compatible = "gpio-rows";
@@ -19,12 +50,26 @@
       gpios = <&gpio2 10 GPIO_ACTIVE_HIGH>;
       label = "Row1";
     };
-  };
-  aliases {
-    rhs = &rhs;
-    column1 = &column1;
-    column2 = &column2;
-    row1 = &row1;
+    row2: row2 {
+      gpios = <&gpio2 17 GPIO_ACTIVE_HIGH>;
+      label = "Row2";
+    };
+    row3: row3 {
+      gpios = <&gpio2 16 GPIO_ACTIVE_HIGH>;
+      label = "Row3";
+    };
+    row4: row4 {
+      gpios = <&gpio2 11 GPIO_ACTIVE_HIGH>;
+      label = "Row4";
+    };
+    row5: row5 {
+      gpios = <&gpio2 0 GPIO_ACTIVE_HIGH>;
+      label = "Row5";
+    };
+    row6: row6 {
+      gpios = <&gpio2 2 GPIO_ACTIVE_HIGH>;
+      label = "Row6";
+    };
   };
 };
 
