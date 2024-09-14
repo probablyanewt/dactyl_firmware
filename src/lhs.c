@@ -1,7 +1,6 @@
 #include <device.h>
 #include <devicetree.h>
 #include <drivers/gpio.h>
-#include <keypress.h>
 #include <zephyr.h>
 
 #define COLUMN1 DT_ALIAS(column1)
@@ -46,23 +45,23 @@ void lhs_init() {
   }
 }
 
-void scan_rows(int column_buf[6]) {
+void lhs_scan_rows(int column_buf[6]) {
   int i;
   for (i = 0; i < 6; i++) {
     column_buf[i] = gpio_pin_get_dt(rows[i]);
   }
 }
 
-void scan_column(const struct gpio_dt_spec *column, int column_buf[6]) {
+void lhs_scan_column(const struct gpio_dt_spec *column, int column_buf[6]) {
   gpio_pin_set_dt(column, 1);
   k_sleep(LHS_SCAN_DELAY);
-  scan_rows(column_buf);
+  lhs_scan_rows(column_buf);
   gpio_pin_set_dt(column, 0);
 }
 
 void lhs_scan(int keystate[6][6]) {
   int i;
   for (i = 0; i < 6; i++) {
-    scan_column(columns[i], keystate[i]);
+    lhs_scan_column(columns[i], keystate[i]);
   }
 }
