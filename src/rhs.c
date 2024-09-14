@@ -8,25 +8,23 @@
 #define COLUMN_DIR_REGISTER 0x00
 #define COLUMN_DIR_CONFIG 0x00
 #define COLUMNS_REGISTER 0x12
-#define COLUMN_1 0x80
-#define COLUMN_2 0x40
-#define COLUMN_3 0x20
-#define COLUMN_4 0x10
-#define COLUMN_5 0x08
-#define COLUMN_6 0x04
-#define NO_COLUMN 0x00
+#define COLUMN_1 0xFE
+#define COLUMN_2 0xFD
+#define COLUMN_3 0xFB
+#define COLUMN_4 0xF7
+#define COLUMN_5 0xEF
+#define COLUMN_6 0xDF
+#define NO_COLUMN 0xFF
 
-#define ROW_PULL_UP_REGISTER 0x0D
-#define ROW_PULL_UP_CONFIG 0xFF
 #define ROW_POLARITY_REGISTER 0x03
 #define ROW_POLARITY_CONFIG 0xFF
 #define ROWS_REGISTER 0x13
-#define ROW_1 1
-#define ROW_2 2
-#define ROW_3 4
-#define ROW_4 8
-#define ROW_5 16
-#define ROW_6 32
+#define ROW_1 0 
+#define ROW_2 1
+#define ROW_3 2
+#define ROW_4 3
+#define ROW_5 4
+#define ROW_6 5
 
 #define RHS_SCAN_DELAY K_USEC(5)
 
@@ -40,7 +38,6 @@ void rhs_init() {
     return;
   }
   i2c_reg_write_byte_dt(&rhs, COLUMN_DIR_REGISTER, COLUMN_DIR_CONFIG);
-  i2c_reg_write_byte_dt(&rhs, ROW_PULL_UP_REGISTER, ROW_PULL_UP_CONFIG);
   i2c_reg_write_byte_dt(&rhs, ROW_POLARITY_REGISTER, ROW_POLARITY_CONFIG);
 }
 
@@ -49,7 +46,7 @@ void rhs_scan_rows(int column_buf[6]) {
   i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
   int i;
   for (i = 0; i < 6; i++) {
-    column_buf[i] = result & rows[i];
+    column_buf[i] = (result >> rows[i]) & 1;
   }
 }
 
