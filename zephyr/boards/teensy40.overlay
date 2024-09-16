@@ -1,7 +1,4 @@
 / {
-	chosen {
-		zephyr,console = &cdc_acm_uart0;
-	};
   aliases {
     rhs = &rhs;
     column1 = &column1;
@@ -71,13 +68,6 @@
       label = "Row6";
     };
   };
-};
-
-&zephyr_udc0 {
-	cdc_acm_uart0: cdc_acm_uart0 {
-		compatible = "zephyr,cdc-acm-uart";
-    label = "ZEPHYR CONSOLE";
-	};
 };
 
 &lpuart6 {

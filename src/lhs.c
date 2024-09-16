@@ -65,3 +65,4 @@ void lhs_scan(int keystate[6][6]) {
     lhs_scan_column(columns[i], keystate[i]);
   }
 }
+

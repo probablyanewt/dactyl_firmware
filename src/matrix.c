@@ -7,7 +7,7 @@ void matrix_init() {
 }
 
 void matrix_scan(int keystate[12][6]) {
-  int lhs_keystate[6][6], rhs_keystate[6][6];
+  int lhs_keystate[6][6] = {{0}} , rhs_keystate[6][6] = {{0}};
   lhs_scan(lhs_keystate);
   rhs_scan(rhs_keystate);
   int column, row;
@@ -21,3 +21,4 @@ void matrix_scan(int keystate[12][6]) {
     }
   }
 }
+
