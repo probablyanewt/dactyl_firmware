@@ -61,9 +61,25 @@ int keyboard_init() {
   return usb_enable(status_cb);
 }
 
+bool is_unchanged(uint8_t keycodes[6], uint8_t modifiers) {
+  int i;
+  for (i = 0; i < 6; i++) {
+    if (keycodes[i] != previous_keycodes[i]) {
+      return false;
+    };
+  }
+  return modifiers == previous_modifiers;
+}
+
+void store_keycodes(uint8_t keycodes[6]) {
+  int i;
+  for (i = 0; i < 6; i++) {
+    previous_keycodes[i] = keycodes[i];
+  }
+}
+
 void keyboard_send(uint8_t keycodes[6], uint8_t modifiers) {
-  if ((memcmp(keycodes, previous_keycodes, sizeof *previous_keycodes) == 0) &&
-      (modifiers == previous_modifiers)) {
+  if (is_unchanged(keycodes, modifiers)) {
     return;
   }
 
@@ -83,7 +99,7 @@ void keyboard_send(uint8_t keycodes[6], uint8_t modifiers) {
     return;
   }
 
-  memcpy(previous_keycodes, keycodes, sizeof *previous_keycodes);
+  store_keycodes(keycodes);
   previous_modifiers = modifiers;
 }
 

@@ -57,7 +57,7 @@ void layout_keycodes_from_keystate(int keystate[12][6], uint8_t keycodes[6],
       if (key == KEY_LEFTSHIFT || key == KEY_LEFTCTRL || key == KEY_LEFTALT ||
           key == KEY_LEFTMETA) {
         set_modifier(modifiers, key);
-        return;
+        continue;
       }
 
       if (keys_pressed == 6) {

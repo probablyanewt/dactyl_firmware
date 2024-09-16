@@ -7,7 +7,7 @@
 - [x] Turn LED on when the top left button on the right pad is pressed (I2C)
 - [x] Complete the entire matrix for the left side
 - [x] Complete the entire matrix for the right side
-- [] First layer basic keymap (no modifiers)
-- [] Have keyboard recognised as such over USB
-- [] Modifier keys
+- [x] First layer basic keymap (no modifiers)
+- [x] Have keyboard recognised as such over USB
+- [x] Modifier keys
 - [] Different layers/keymaps
