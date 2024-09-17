@@ -5,13 +5,8 @@
 #include <zephyr.h>
 
 #define MAIN_LOOP_DELAY K_USEC(500)
-#define LED0_NODE DT_ALIAS(led0)
-
-static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 int main(void) {
-  gpio_pin_configure_dt(&led, GPIO_OUTPUT_LOW);
-
   matrix_init();
 
   while (1) {

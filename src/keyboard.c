@@ -79,6 +79,7 @@ void store_keycodes(uint8_t keycodes[6]) {
 }
 
 void keyboard_send(uint8_t keycodes[6], uint8_t modifiers) {
+  // probably a better way of doing this with memcmp
   if (is_unchanged(keycodes, modifiers)) {
     return;
   }
@@ -99,6 +100,7 @@ void keyboard_send(uint8_t keycodes[6], uint8_t modifiers) {
     return;
   }
 
+  // probably a better way of doing this with memcpy
   store_keycodes(keycodes);
   previous_modifiers = modifiers;
 }

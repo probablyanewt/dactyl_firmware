@@ -1,24 +1,45 @@
 # Dactyl Firmware
 
-This repo contains the firmware for my dactyl keyboard, written in C using the Zephyr RTOS.
+This repo contains the firmware for my dactyl keyboard, written in C using the Zephyr RTOS. 
+![image of keyboard](https://github.com/probablyanewt/dactyl_firmware/blob/main/assets/keyboard.png?raw=true)
+
+## The build
+
+For the build I largely followed the instructions [here](https://github.com/adereth/dactyl-keyboard). I would encourage anyone interested to have a go, and make mistakes.
+
+## The journey
+
+As mentioned above, mistakes were made. I had to resolder the MCP23018 and all of the diodes on the right side. Other than that, the build stage was relatively painless. 
+
+The firmware was a real learning curve. Initially I intended to use QMK, but my specific configuration was unsupported. I was faced with a decision to use a different microcontroller, or build my firmware from scratch. So, naturally, I decided to write my own firmware. 
+
+I came across ZMK during my research, but again, my use case wasn't that well supported, so I started looking at tools I had used before like PlatformIO and Arduino. I didn't really want to use C++, and fancied using C, and then I stumbled upon Zephyr when looking through PlatformIO.
+
+After getting my dev environment setup, I faced a steep learning curve. I broke down the task into chunks and plowed on. I've created a branch after each of these milestones to serve as a reminder to myself in the future. 
+
+`blinky` - something basic to compile and flash, just toggles the board led.  
+`hello-world` - communicating with uart over usb.  
+`boop` - make a single button work with gpio pins.  
+`boop-rhs` - make a single button work on the rhs using i2c.  
+`lhs` - complete scanning matrix on lhs.  
 
 ## Pin configuration
 
 ### LHS
-| Pin | Zephyr Port/Pin | Usage    |
-|-----|-----------------|----------|
-|  0  | GPIO1_3         | Column 1 |
-|  1  | GPIO1_2         | Column 2 |
-|  2  | GPIO4_4         | Column 3 |
-|  3  | GPIO4_5         | Column 4 |
-|  4  | GPIO4_6         | Column 5 |
-|  5  | GPIO4_8         | Column 6 |
-|  6  | GPIO2_10        | Row 1    |
-|  7  | GPIO2_17        | Row 2    |
-|  8  | GPIO2_16        | Row 3    |
-|  9  | GPIO2_11        | Row 4    |
-| 10  | GPIO2_0         | Row 5    |
-| 11  | GPIO2_2         | Row 6    |
+| Pin | Port/Pin | Usage    |
+|-----|----------|----------|
+|  0  | GPIO1_3  | Column 1 |
+|  1  | GPIO1_2  | Column 2 |
+|  2  | GPIO4_4  | Column 3 |
+|  3  | GPIO4_5  | Column 4 |
+|  4  | GPIO4_6  | Column 5 |
+|  5  | GPIO4_8  | Column 6 |
+|  6  | GPIO2_10 | Row 1    |
+|  7  | GPIO2_17 | Row 2    |
+|  8  | GPIO2_16 | Row 3    |
+|  9  | GPIO2_11 | Row 4    |
+| 10  | GPIO2_0  | Row 5    |
+| 11  | GPIO2_2  | Row 6    |
 
 | Pin | Usage    | 
 |-----|----------| 

@@ -10,4 +10,10 @@
 - [x] First layer basic keymap (no modifiers)
 - [x] Have keyboard recognised as such over USB
 - [x] Modifier keys
-- [] Different layers/keymaps
+- [x] Different layers/keymaps
+
+# Future improvements
+
+- [ ] Optimise matrix scanning, I think I can cut down on the loops
+- [ ] Error recovery
+- [ ] Moar layouts
