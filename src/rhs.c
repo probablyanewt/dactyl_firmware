@@ -2,6 +2,7 @@
 #include <devicetree.h>
 #include <drivers/i2c.h>
 #include <zephyr.h>
+#include <sys/reboot.h>
 
 #define RHS DT_ALIAS(rhs)
 
@@ -33,6 +34,8 @@ static const uint8_t columns[6] = {COLUMN_1, COLUMN_2, COLUMN_3,
                                    COLUMN_4, COLUMN_5, COLUMN_6};
 static const uint8_t rows[6] = {ROW_1, ROW_2, ROW_3, ROW_4, ROW_5, ROW_6};
 
+static int error_count = 0;
+
 void rhs_init() {
   if (!device_is_ready(rhs.bus)) {
     return;
@@ -43,7 +46,14 @@ void rhs_init() {
 
 void rhs_scan_rows(int column_buf[6]) {
   uint8_t result;
-  i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
+  int err = i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
+  if(err!=0){
+    if(error_count >= 5){
+      sys_reboot(SYS_REBOOT_WARM); 
+    }
+    error_count +=1;
+  }
+  error_count = 0;
   int i;
   for (i = 0; i < 6; i++) {
     column_buf[i] = (result >> rows[i]) & 1;
