@@ -15,7 +15,7 @@
 #define COLUMN11                                                               \
   {KEY_0, KEY_P, KEY_SEMICOLON, KEY_LEFTBRACE, KEY_APOSTROPHE, KEY_BACKSPACE}
 #define COLUMN12                                                               \
-  {KEY_MINUS, KEY_EQUAL, KEY_SLASH, KEY_RIGHTBRACE, KEY_SLASH, KEY_NONE} 
+  {KEY_MINUS, KEY_EQUAL, KEY_SLASH, KEY_RIGHTBRACE, KEY_HASHTILDE, KEY_NONE} 
 
 #define BASE_LAYOUT                                                            \
   {COLUMN1, COLUMN2, COLUMN3, COLUMN4,  COLUMN5,  COLUMN6,                     \

@@ -1,3 +1,3 @@
-void lhs_init(void);
+void lhs_init();
 
-void lhs_scan(int keystate[6][6]);
+void lhs_scan();
