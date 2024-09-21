@@ -3,6 +3,7 @@
 #include <drivers/i2c.h>
 #include <zephyr.h>
 #include <sys/reboot.h>
+#include <keystate.h>
 
 #define RHS DT_ALIAS(rhs)
 
@@ -44,7 +45,7 @@ void rhs_init() {
   i2c_reg_write_byte_dt(&rhs, ROW_POLARITY_REGISTER, ROW_POLARITY_CONFIG);
 }
 
-void rhs_scan_rows(int column_buf[6]) {
+void rhs_scan_rows(int column_index) {
   uint8_t result;
   int err = i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
   if(err!=0){
@@ -54,22 +55,23 @@ void rhs_scan_rows(int column_buf[6]) {
     error_count +=1;
   }
   error_count = 0;
+  
   int i;
   for (i = 0; i < 6; i++) {
-    column_buf[i] = (result >> rows[i]) & 1;
+    int row = (result >> rows[i]) & 1;
+    if(row==1){
+      keystate_register_key(column_index,i);
+    }
   }
 }
 
-void rhs_scan_column(uint8_t column, int column_buf[6]) {
-  i2c_reg_write_byte_dt(&rhs, COLUMNS_REGISTER, column);
-  k_sleep(RHS_SCAN_DELAY);
-  rhs_scan_rows(column_buf);
-}
-
-void rhs_scan(int keystate[6][6]) {
+void rhs_scan() {
   int i;
   for (i = 0; i < 6; i++) {
-    rhs_scan_column(columns[i], keystate[i]);
+    i2c_reg_write_byte_dt(&rhs, COLUMNS_REGISTER, columns[i]);
+    k_sleep(RHS_SCAN_DELAY);
+    rhs_scan_rows(i);
   }
   i2c_reg_write_byte_dt(&rhs, COLUMNS_REGISTER, NO_COLUMN);
 }
+

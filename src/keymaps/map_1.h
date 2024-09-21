@@ -1,7 +1,8 @@
 #include <stdint.h>
-#include <keymaps/keys.h>
+#include "keys.h"
+#include "../constants.h"
 
-const uint16_t map_1[2][6][12] = {
+const static uint16_t map_1[KEYMAP_LAYERS][ROW_SIZE][COLUMN_SIZE] = {
 /* Keymap 0: Basic layer
  *
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -23,7 +24,7 @@ const uint16_t map_1[2][6][12] = {
  *                               |      |      | SHFT |  | SHFT |      |ace   |
  *                               `--------------------'  `--------------------'
  */
-[0]={
+{
     {K_GRAVE, K_1,    K_2,    K_3,    K_4,    K_5,        K_6,    K_7,    K_8,      K_9,    K_0,      K_MINUS},
     {K_TAB,   K_Q,    K_W,    K_E,    K_R,    K_T,        K_Y,    K_U,    K_I,      K_O,    K_P,      K_EQUAL},
     {K_ESC,   K_A,    K_S,    K_D,    K_F,    K_G,        K_H,    K_J,    K_K,      K_L,    K_SCOLON, K_SLASH},
@@ -52,12 +53,12 @@ const uint16_t map_1[2][6][12] = {
  *                               |      |      |      |  |      |      |      |
  *                               `--------------------'  `--------------------'
  */
-[1]={
+{
     {K_NK,  K_F1,   K_F2,   K_F3,   K_F4,   K_F5,       K_F6,   K_F7,   K_F8,   K_F9,     K_F10,    K_NK},
     {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
     {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_LEFT, K_DOWN, K_UP,   K_RIGHT,  K_NK,     K_NK},
     {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
+    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       KB_L1,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
     {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
   },
 };

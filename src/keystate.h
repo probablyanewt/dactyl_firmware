@@ -1,13 +1,13 @@
 #include <stdint.h>
 
-#define MAX_KEYS_BUFFER_SIZE 12
+#define KEYS_BUFFER_SIZE 12
 
 // First four bits represent the column index, second four bits represent the row index
 typedef uint8_t key;
 
 struct keystate {
   uint8_t len;
-  key keys[MAX_KEYS_BUFFER_SIZE];
+  key keys[KEYS_BUFFER_SIZE];
 };
 
 static struct keystate keystate = {.len = 0, .keys = {}};

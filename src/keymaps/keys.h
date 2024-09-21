@@ -1,9 +1,13 @@
+#define KEYMAP_LAYERS 2
+
+// First four bits for layer, second four bits for modifiers, 8 bits for keycode
+
 #define KB_L1 0x1000
 #define KB_L2 0x2000
 #define KB_KM1 0x3000
 
 #define K_NK 0x0000 // No key pressed
-#define K_ERR_OVF 0x0001 //  Keyboard Error Roll Over - used for all slots if too many keys are pressed ("Phantom key")
+#define K_ERR_OVF 0x0001 //  Keyboard Error Roll Over
 #define K_A 0x0004 // Keyboard a and A
 #define K_B 0x0005 // Keyboard b and B
 #define K_C 0x0006 // Keyboard c and C
@@ -44,7 +48,7 @@
 
 #define K_ENTER 0x0028 // Keyboard Return (ENTER)
 #define K_ESC 0x0029 // Keyboard ESCAPE
-#define K_BSPACE 0x002a // Keyboard DELETE (Backspace)
+#define K_BSPACE 0x002a // Keyboard Backspace
 #define K_TAB 0x002b // Keyboard Tab
 #define K_SPACE 0x002c // Keyboard Spacebar
 #define K_MINUS 0x002d // Keyboard - and _

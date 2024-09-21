@@ -7,15 +7,15 @@ key matrix_indices_to_key(uint8_t column,uint8_t row){
 }
 
 void keystate_register_key(uint8_t column, uint8_t row) {
-  if (keystate.len >= MAX_KEYS_BUFFER_SIZE) {
+  if (keystate.len >= KEYS_BUFFER_SIZE) {
     return;
   }
   keystate.keys[keystate.len] = matrix_indices_to_key(column,row);
-  keystate.len += 1;
+  keystate.len ++;
 }
 
 void keystate_reset() {
-  memset(keystate.keys, 0, MAX_KEYS_BUFFER_SIZE);
+  memset(keystate.keys, 0, KEYS_BUFFER_SIZE);
   keystate.len = 0;
 }
 
