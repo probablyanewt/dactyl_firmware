@@ -1,6 +1,8 @@
+#include "constants.h"
 #include <device.h>
-#include <devicetree.h>
+#include <pactf.h>
 #include <stdint.h>
+#include <string.h>
 #include <usb/class/hid.h>
 #include <usb/class/usb_hid.h>
 #include <usb/usb_device.h>
@@ -9,7 +11,7 @@
 static const uint8_t hid_report_desc[] = HID_KEYBOARD_REPORT_DESC();
 const struct device *hid_dev;
 static bool configured;
-static uint8_t previous_keycodes[6] = {0, 0, 0, 0, 0, 0};
+static uint8_t previous_keycodes[MAX_CONSECUTIVE_KEYS] = {0};
 static uint8_t previous_modifiers = 0;
 static K_SEM_DEFINE(hid_sem, 1, 1);
 
@@ -106,3 +108,30 @@ void keyboard_send(uint8_t keycodes[6], uint8_t modifiers) {
 }
 
 SYS_INIT(keyboard_init, APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEVICE);
+
+// PACTF_SETUP(
+//
+//     P_BEFORE_EACH({
+//       memset(previous_keycodes, 0, MAX_CONSECUTIVE_KEYS);
+//       previous_modifiers = 0;
+//     });
+//
+// );
+//
+// PACTF_SUITE({
+//   P_FUNCTION("is_unchanged", {
+//     P_TEST("it should return true if keycodes and modifiers are unchanged from "
+//            "the previous message",
+//            {
+//              previous_keycodes[0] = 0x12;
+//              P_ASSERT(is_unchanged(previous_keycodes, previous_modifiers));
+//            });
+//
+//     P_TEST("it should return false if keycodes have changed from the previous "
+//            "message",
+//            {
+//              uint8_t new_keycodes[MAX_CONSECUTIVE_KEYS] = {0x12};
+//              P_ASSERT(!is_unchanged(new_keycodes, previous_modifiers));
+//            });
+//   });
+// });
