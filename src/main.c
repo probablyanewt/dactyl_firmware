@@ -9,10 +9,6 @@
 
 #define MAIN_LOOP_DELAY K_USEC(500)
 
-void k_sys_fatal_error_handler(unsigned int reason, const z_arch_esf_t *esf) {
-  sys_reboot(SYS_REBOOT_WARM);
-}
-
 int main(void) {
   matrix_init();
 

@@ -1,9 +1,9 @@
 #include <device.h>
 #include <devicetree.h>
 #include <drivers/i2c.h>
-#include <zephyr.h>
-#include <sys/reboot.h>
 #include <keystate.h>
+#include <sys/reboot.h>
+#include <zephyr.h>
 
 #define RHS DT_ALIAS(rhs)
 
@@ -21,7 +21,7 @@
 #define ROW_POLARITY_REGISTER 0x03
 #define ROW_POLARITY_CONFIG 0xFF
 #define ROWS_REGISTER 0x13
-#define ROW_1 0 
+#define ROW_1 0
 #define ROW_2 1
 #define ROW_3 2
 #define ROW_4 3
@@ -35,8 +35,6 @@ static const uint8_t columns[6] = {COLUMN_1, COLUMN_2, COLUMN_3,
                                    COLUMN_4, COLUMN_5, COLUMN_6};
 static const uint8_t rows[6] = {ROW_1, ROW_2, ROW_3, ROW_4, ROW_5, ROW_6};
 
-static int error_count = 0;
-
 void rhs_init() {
   if (!device_is_ready(rhs.bus)) {
     return;
@@ -47,20 +45,13 @@ void rhs_init() {
 
 void rhs_scan_rows(int column_index) {
   uint8_t result;
-  int err = i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
-  if(err!=0){
-    if(error_count >= 5){
-      sys_reboot(SYS_REBOOT_WARM); 
-    }
-    error_count +=1;
-  }
-  error_count = 0;
-  
+  i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
+
   int i;
   for (i = 0; i < 6; i++) {
     int row = (result >> rows[i]) & 1;
-    if(row==1){
-      keystate_register_key(column_index,i);
+    if (row == 1) {
+      keystate_register_key(column_index + 6, i);
     }
   }
 }
@@ -74,4 +65,3 @@ void rhs_scan() {
   }
   i2c_reg_write_byte_dt(&rhs, COLUMNS_REGISTER, NO_COLUMN);
 }
-

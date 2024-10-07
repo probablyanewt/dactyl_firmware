@@ -1,10 +1,10 @@
 all: clean build
 
 build:
-	pio -f -c vim run
+	pio -f -c vim run	
 
 init:
-	pio -f -c vim run --target compiledb
+	PLATFORMIO_BUILD_FLAGS=-DPACTF_ENABLE pio -f -c vim run --target compiledb 
 
 upload:
 	pio -f -c vim run --target upload
@@ -12,14 +12,24 @@ upload:
 clean:
 	pio -f -c vim run --target clean
 
-program:
-	pio -f -c vim run --target program
+# program:
+# 	pio -f -c vim run --target program
 
-uploadfs:
-	pio -f -c vim run --target uploadfs
+# uploadfs:
+# 	pio -f -c vim run --target uploadfs
 
 update:
 	pio -f -c vim pkg update
 
 debug:
-	sudo minicom -D /dev/ttyACM0
+	minicom -D /dev/ttyACM0
+
+test: 
+	@mkdir -p .tests
+	@gcc -DPACTF_ENABLE -o .tests/$(file) src/$(file).c
+	@./.tests/$(file)
+
+test-all:
+	$(MAKE) test --no-print-directory file=layout
+	$(MAKE) test --no-print-directory file=keystate
+

@@ -6,6 +6,10 @@
 #define KB_L2 0x2000
 #define KB_KM1 0x3000
 
+#define KB_COPY K_CTRL | K_C
+#define KB_PASTE K_CTRL | K_V
+#define KB_C_A K_CTRL | K_A
+
 #define K_NK 0x0000 // No key pressed
 #define K_ERR_OVF 0x0001 //  Keyboard Error Roll Over
 #define K_A 0x0004 // Keyboard a and A

@@ -12,9 +12,9 @@ const static uint16_t map_1[KEYMAP_LAYERS][ROW_SIZE][COLUMN_SIZE] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Esc  |   A  |   S  |   D  |   F  |   G  |                    |   H  |   J  |   K  |   L  |   ;  |  /   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | SHFT |   Z  |   X  |   C  |   V  |   B  |                    |   N  |   M  |   ,  |   .  |   [  |  ]   |
+ * | \    |   Z  |   X  |   C  |   V  |   B  |                    |   N  |   M  |   ,  |   .  |   [  |  ]   |
  * |------+------+------+------+------+------'                    `------+------+------+------+------+------|
- * | CTRL | Alt  |   #  |      |      |                                  |      |      |      |   '  |      |
+ * |      |      | C_A  | COPY |PASTE |                                  |      |      |      |   '  |  #   |
  * `----------------------------------'                                  `----------------------------------'
  *                                      ,-------------.  ,-------------.
  *                                      | Alt  | Meta |  |      | L-1  |
@@ -24,18 +24,18 @@ const static uint16_t map_1[KEYMAP_LAYERS][ROW_SIZE][COLUMN_SIZE] = {
  *                               |      |      | SHFT |  | SHFT |      |ace   |
  *                               `--------------------'  `--------------------'
  */
-{
-    {K_GRAVE, K_1,    K_2,    K_3,    K_4,    K_5,        K_6,    K_7,    K_8,      K_9,    K_0,      K_MINUS},
-    {K_TAB,   K_Q,    K_W,    K_E,    K_R,    K_T,        K_Y,    K_U,    K_I,      K_O,    K_P,      K_EQUAL},
-    {K_ESC,   K_A,    K_S,    K_D,    K_F,    K_G,        K_H,    K_J,    K_K,      K_L,    K_SCOLON, K_SLASH},
-    {K_SHIFT, K_Z,    K_X,    K_C,    K_V,    K_B,        K_N,    K_M,    K_COMMA,  K_DOT,  K_LBRACE, K_RBRACE},
-    {K_CTRL,  K_ALT,  K_HASH, K_NK,   K_NK,   K_ALT,      KB_L1,  K_NK,   K_NK,     K_NK,   K_APOST,  K_NK},
-    {K_NK,    K_ENTER,K_SPACE,K_SHIFT,K_CTRL, K_META,     K_NK,   K_CTRL, K_SHIFT,  K_SPACE,K_BSPACE, K_NK}
+  {
+    {K_GRAVE, K_1,    K_2,      K_3,    K_4,      K_5,    K_6,    K_7,    K_8,      K_9,    K_0,      K_MINUS},
+    {K_TAB,   K_Q,    K_W,      K_E,    K_R,      K_T,    K_Y,    K_U,    K_I,      K_O,    K_P,      K_EQUAL},
+    {K_ESC,   K_A,    K_S,      K_D,    K_F,      K_G,    K_H,    K_J,    K_K,      K_L,    K_SCOLON, K_SLASH},
+    {K_SHIFT, K_Z,    K_X,      K_C,    K_V,      K_B,    K_N,    K_M,    K_COMMA,  K_DOT,  K_LBRACE, K_RBRACE},
+    {K_NK,    K_NK,   KB_C_A,   KB_COPY,KB_PASTE, K_ALT,  KB_L1,  K_NK,   K_NK,     K_NK,   K_APOST,  K_HASH},
+    {K_NK,    K_ENTER,K_SPACE,  K_SHIFT,K_CTRL,   K_META, K_NK,   K_CTRL, K_SHIFT,  K_SPACE,K_BSPACE, K_NK}
   },
 /* Keymap 1: Second layer
  *
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  |      |
+ * |      |  F1  |  F2  |  F3  |  F4  |  F5  |                    |  F6  |  F7  |  F8  |  F9  | F10  | F11  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -46,19 +46,19 @@ const static uint16_t map_1[KEYMAP_LAYERS][ROW_SIZE][COLUMN_SIZE] = {
  * |      |      |      |      |      |                                  |      |      |      |      |      |
  * `----------------------------------'                                  `----------------------------------'
  *                                      ,-------------.  ,-------------.
- *                                      |      |      |  |      |<L-1> |
+ *                                      | Alt  | Meta |  |      |<L-1> |
  *                               ,------|------|------|  |------+------+------.
- *                               |      |      |      |  |      |      |      |
+ *                               |      |      | CTRL |  |      |      |      |
  *                               |      |      |------|  |------|      |      |
- *                               |      |      |      |  |      |      |      |
+ *                               |      |      | SHFT |  |      |      |      |
  *                               `--------------------'  `--------------------'
  */
-{
-    {K_NK,  K_F1,   K_F2,   K_F3,   K_F4,   K_F5,       K_F6,   K_F7,   K_F8,   K_F9,     K_F10,    K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_LEFT, K_DOWN, K_UP,   K_RIGHT,  K_NK,     K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       KB_L1,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
-    {K_NK,  K_NK,   K_NK,   K_NK,   K_NK,   K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
+  {
+    {K_NK,  K_F1,   K_F2,   K_F3,     K_F4,     K_F5,       K_F6,   K_F7,   K_F8,   K_F9,     K_F10,    K_F11},
+    {K_NK,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
+    {K_NK,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK,       K_LEFT, K_DOWN, K_UP,   K_RIGHT,  K_NK,     K_NK},
+    {K_NK,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK,       K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
+    {K_NK,  K_NK,   K_NK,   K_NK,     K_NK,     K_ALT,      KB_L1,  K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
+    {K_NK,  K_NK,   K_NK,   K_SHIFT,  K_CTRL,   K_META,     K_NK,   K_NK,   K_NK,   K_NK,     K_NK,     K_NK},
   },
 };
