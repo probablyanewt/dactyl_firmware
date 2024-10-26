@@ -15,17 +15,6 @@
 #define ROW1 DT_ALIAS(row1)
 #define RHS DT_ALIAS(rhs)
 
-#define COLUMN_DIR_REGISTER 0x00
-#define COLUMN_DIR_CONFIG 0x00
-#define COLUMNS_REGISTER 0x12
-
-#define ROW_PULL_UP_REGISTER 0x0D
-#define ROW_PULL_UP_CONFIG 0xFF
-#define ROW_POLARITY_REGISTER 0x03
-#define ROW_POLARITY_CONFIG 0xFF
-#define ROWS_REGISTER 0x13
-#define COLUMN_1 0xFE
-
 BUILD_ASSERT(DT_NODE_HAS_COMPAT(ZEPHYR_CONSOLE, zephyr_cdc_acm_uart),
              "Console device is not ACM CDC UART device");
 
@@ -35,6 +24,8 @@ static const struct i2c_dt_spec rhs = I2C_DT_SPEC_GET(RHS);
 static const struct gpio_dt_spec column1 = GPIO_DT_SPEC_GET(COLUMN1, gpios);
 static const struct gpio_dt_spec column2 = GPIO_DT_SPEC_GET(COLUMN2, gpios);
 static const struct gpio_dt_spec row1 = GPIO_DT_SPEC_GET(ROW1, gpios);
+static const uint8_t rhs_column_1[2] = {0xFE, 0xFF};
+static const uint8_t rhs_no_column[2] = {0xFF, 0xFF};
 
 void print_uart(char *buf) {
   int msg_len = strlen(buf);
@@ -58,28 +49,28 @@ int main(void) {
   }
 
   gpio_pin_set_dt(&led, 0);
-
-  // Set columns as output and set first column high
-  i2c_reg_write_byte_dt(&rhs, COLUMN_DIR_REGISTER, COLUMN_DIR_CONFIG);
-  i2c_reg_write_byte_dt(&rhs, COLUMNS_REGISTER, COLUMN_1);
-
-  // Enable row pullups and reverse polarity
-  i2c_reg_write_byte_dt(&rhs, ROW_PULL_UP_REGISTER, ROW_PULL_UP_CONFIG);
-  i2c_reg_write_byte_dt(&rhs, ROW_POLARITY_REGISTER, ROW_POLARITY_CONFIG);
+  i2c_write_dt(&rhs, rhs_column_1, 2);
+  k_sleep(K_MSEC(20));
 
   while (1) {
-    uint8_t result;
-    i2c_reg_read_byte_dt(&rhs, ROWS_REGISTER, &result);
+    uint8_t result[2] = {0xFF, 0xFF};
+    i2c_read_dt(&rhs, result, 2);
+    k_sleep(K_MSEC(20));
 
     // Get last bit to represent first row
-    int val = result & 1;
-    gpio_pin_set_dt(&led, val);
+    int val = result[1] & 1;
+    gpio_pin_set_dt(&led, val == 0);
 
     // Debug logging to uart
     print_uart("\033[2J");
     char result_buf;
-    sprintf(&result_buf, "%d", result);
+    sprintf(&result_buf, "%d", result[0]);
     print_uart(&result_buf);
+    print_uart("\n");
+    char result_buf2;
+    uint8_t val2 = result[1];
+    sprintf(&result_buf2, "%d", val2);
+    print_uart(&result_buf2);
     k_sleep(K_MSEC(20));
   }
 }
