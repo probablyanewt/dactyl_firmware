@@ -76,10 +76,11 @@
 
 &lpi2c1 {
   status = "okay";
-  rhs: rhs@20 {
+  clock-frequency = <0x61A80>;
+  rhs: rhs@40 {
     compatible = "i2c-device";
-    reg = <0x20>;
-    label = "MCP23018 in right hand side of keyboard";
+    reg = <0x40>;
+    label = "PCF8575 in right hand side of keyboard";
   };
 };
 

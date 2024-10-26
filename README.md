@@ -51,10 +51,10 @@ If your goal is just to make a keyboard, just use QMK or ZMK. However, if you wi
 | 10  | GPIO2_0  | Row 5    |
 | 11  | GPIO2_2  | Row 6    |
 
-| Pin | Usage    |
+| Pin | Usage    | Notes  |
 | --- | -------- | ------ |
 | 18  | I2C1_SDA | to RHS |
-| 19  | I2C1_SCL |
+| 19  | I2C1_SCL |        |
 
 ### RHS
 

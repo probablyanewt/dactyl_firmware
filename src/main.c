@@ -1,10 +1,8 @@
 #include <constants.h>
-#include <drivers/gpio.h>
 #include <keyboard.h>
 #include <keystate.h>
 #include <layout.h>
 #include <matrix.h>
-#include <sys/reboot.h>
 #include <zephyr.h>
 
 #define MAIN_LOOP_DELAY K_USEC(500)

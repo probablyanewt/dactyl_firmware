@@ -1,4 +1,4 @@
-void rhs_init();
+int rhs_init();
 
 void rhs_scan();
 
