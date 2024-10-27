@@ -28,7 +28,10 @@ After getting my dev environment setup, I faced a steep learning curve. I broke 
 `boop-rhs` - make a single button work on the rhs using i2c.  
 `lhs` - complete scanning matrix on lhs.  
 `matrix` - complete scanning of rhs.  
+`rhs-boop-2` - test using the PCF8575 as the rhs gpio extender
 `main` - current version.
+
+After experiencing a number of short issues on the rhs, I accidentally broke a pin of the MCP23018 when attempting to diagnose them. At that point, I elected to replace it with a different gpio expander, and instead opted for the PCF8575.
 
 If your goal is just to make a keyboard, just use QMK or ZMK. However, if you wish to learn C, or Zephyr and really get to grips with how a keyboard works, then I can thoroughly recommend a project like this.
 
@@ -58,23 +61,17 @@ If your goal is just to make a keyboard, just use QMK or ZMK. However, if you wi
 
 ### RHS
 
-| Pin | RegBit | Usage    |
-| --- | ------ | -------- |
-| 20  | GPA/0  | Column 1 |
-| 21  | GPA/1  | Column 2 |
-| 22  | GPA/2  | Column 3 |
-| 23  | GPA/3  | Column 4 |
-| 24  | GPA/4  | Column 5 |
-| 25  | GPA/5  | Column 6 |
-| 3   | GPB/0  | Row 1    |
-| 4   | GPB/1  | Row 2    |
-| 5   | GPB/2  | Row 3    |
-| 6   | GPB/3  | Row 4    |
-| 7   | GPB/4  | Row 5    |
-| 8   | GPB/5  | Row 6    |
-
-| Register | Hex Adress | Use                                   |
-| -------- | ---------- | ------------------------------------- |
-| IODIRA   | 0x00       | Set direction for GPIO pins on port A |
-| GPIOA    | 0x12       | Pins attached to the columns (output) |
-| GPIOB    | 0x13       | Pins attached to the rows (input)     |
+| Pin | Usage    |
+| --- | -------- |
+| 00  | Column 1 |
+| 01  | Column 2 |
+| 02  | Column 3 |
+| 03  | Column 4 |
+| 04  | Column 5 |
+| 05  | Column 6 |
+| 10  | Row 1    |
+| 11  | Row 2    |
+| 12  | Row 3    |
+| 13  | Row 4    |
+| 14  | Row 5    |
+| 15  | Row 6    |
