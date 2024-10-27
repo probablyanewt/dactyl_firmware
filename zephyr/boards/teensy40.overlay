@@ -77,9 +77,9 @@
 &lpi2c1 {
   status = "okay";
   clock-frequency = <0x61A80>;
-  rhs: rhs@40 {
+  rhs: rhs@20 {
     compatible = "i2c-device";
-    reg = <0x40>;
+    reg = <0x20>;
     label = "PCF8575 in right hand side of keyboard";
   };
 };
