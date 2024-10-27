@@ -1,13 +1,12 @@
 #include <lhs.h>
 #include <rhs.h>
 
-void matrix_init() {
+int matrix_init() {
   lhs_init();
-  rhs_init();
+  return rhs_init();
 }
 
 void matrix_scan() {
   lhs_scan();
   rhs_scan();
 }
-

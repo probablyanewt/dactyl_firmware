@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 
-static keystate _keystate = {.len = 0, .keys = {}};
+static keystate _keystate = {.len = 0, .keys = {0x00}};
 
 key matrix_indices_to_key(uint8_t column, uint8_t row) {
   return (uint8_t)(((column << 4) & 0xF0) | row);
